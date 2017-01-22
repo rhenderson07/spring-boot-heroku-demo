@@ -12,3 +12,4 @@ release.properties
 *.iml
 .classpath
 *.project
+.settings/
