@@ -1,4 +1,4 @@
-package com.heroku.demo;
+package com.hmbnet.demo;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
