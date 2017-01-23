@@ -1,0 +1,90 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: phenderson
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: personId
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: firstName
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: middleName
+                  type: varchar(255)
+              - column:
+                  name: lastName
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: address
+            columns:
+              - column:
+                  name: addressId
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: state
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: addressLine1
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: addressLine2
+                  type: varchar(255)
+              - column:
+                  name: zip
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: zipExtra
+                  type: int
+        - createTable:
+            tableName: addressPerson
+            columns:
+              - column:
+                  name: addressId
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: personId
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: preference
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
