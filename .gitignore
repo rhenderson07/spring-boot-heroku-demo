@@ -13,3 +13,6 @@ release.properties
 .classpath
 *.project
 .settings/
+/.apt_generated/
+
+.factorypath
