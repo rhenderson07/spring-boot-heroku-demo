@@ -5,6 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p>You messed up fool!</p>
+	<h1>We're sorry, An error has occurred</h1>
+	<h2 th:text="${statusCode}"></h2>
+    <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+    <p th:unless="${errorMessage}">No message available</p>
 </body>
 </html>
