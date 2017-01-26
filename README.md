@@ -11,3 +11,6 @@ application on [Heroku](http://heroku.com). For more information see the Dev Cen
 ## License
 
 Code is under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
+
+
+Follow GitFlow branching strategy, defined [here](http://nvie.com/posts/a-successful-git-branching-model/).
