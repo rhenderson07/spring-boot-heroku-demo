@@ -30,16 +30,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/person")
 public class PersonController {
 
-	private PersonRepository repository;
+	private PersonRepository personRepo;
 
 	@Autowired
 	public PersonController(PersonRepository repository) {
-		this.repository = repository;
+		this.personRepo = repository;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewPeople(ModelMap model) {
-		List<Person> people = repository.findAll();
+		List<Person> people = personRepo.findAll();
 		model.addAttribute("people", people);
 		model.addAttribute("insertPerson", new Person());
 		return "people";
@@ -50,7 +50,7 @@ public class PersonController {
 			BindingResult result) {
 
 		if (!result.hasErrors()) {
-			repository.save(record);
+			personRepo.save(record);
 		}
 		
 		return "redirect:/person";

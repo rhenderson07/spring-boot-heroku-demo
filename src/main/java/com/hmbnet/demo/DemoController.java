@@ -30,16 +30,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/demo")
 public class DemoController {
 
-    private RecordRepository repository;
+    private RecordRepository recordRepo;
 
     @Autowired
     public DemoController(RecordRepository repository) {
-        this.repository = repository;
+        this.recordRepo = repository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String home(ModelMap model) {
-        List<Record> records = repository.findAll();
+        List<Record> records = recordRepo.findAll();
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         return "demo";
@@ -50,7 +50,7 @@ public class DemoController {
                              @ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {
         if (!result.hasErrors()) {
-            repository.save(record);
+            recordRepo.save(record);
         }
         return home(model);
     }
