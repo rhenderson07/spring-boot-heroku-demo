@@ -1,4 +1,4 @@
-package com.hmbnet.controller;
+package com.hmbnet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +14,8 @@ class GlobalDefaultExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-	// If the exception is annotated with @ResponseStatus rethrow it and let the framework handle it
+	// If the exception is annotated with @ResponseStatus rethrow it and let
+	// the framework handle it
 	if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
 	    throw e;
 	}
@@ -26,4 +27,5 @@ class GlobalDefaultExceptionHandler {
 	mav.setViewName(DEFAULT_ERROR_VIEW);
 	return mav;
     }
+
 }
