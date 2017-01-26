@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: record
             columns:
               - column:
-                  name: id
+                  name: record_id
                   type: int
                   autoIncrement: true
                   constraints:

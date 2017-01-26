@@ -12,7 +12,8 @@ public class Record {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long recordId;
+    
     @NotEmpty
     private String data;
 

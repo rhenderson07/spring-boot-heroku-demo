@@ -7,22 +7,22 @@ databaseChangeLog:
             tableName: person
             columns:
               - column:
-                  name: personId
+                  name: person_id
                   type: int
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: firstName
+                  name: first_name
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: middleName
+                  name: middle_name
                   type: varchar(255)
               - column:
-                  name: lastName
+                  name: last_name
                   type: varchar(255)
                   constraints:
                     nullable: false
@@ -35,7 +35,7 @@ databaseChangeLog:
             tableName: address
             columns:
               - column:
-                  name: addressId
+                  name: address_id
                   type: int
                   autoIncrement: true
                   constraints:
@@ -52,12 +52,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: addressLine1
+                  name: address_line_1
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: addressLine2
+                  name: address_line_2
                   type: varchar(255)
               - column:
                   name: zip
@@ -65,19 +65,19 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: zipExtra
+                  name: zip_extra
                   type: int
         - createTable:
-            tableName: addressPerson
+            tableName: address_person
             columns:
               - column:
-                  name: addressId
+                  name: address_id
                   type: int
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: personId
+                  name: person_id
                   type: int
                   constraints:
                     primaryKey: true

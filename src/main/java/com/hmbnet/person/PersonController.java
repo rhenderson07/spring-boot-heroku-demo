@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hmbnet.demo;
+package com.hmbnet.person;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,31 +27,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/demo")
-public class HomeController {
+@RequestMapping("/person")
+public class PersonController {
 
-    private RecordRepository repository;
+	private PersonRepository repository;
 
-    @Autowired
-    public HomeController(RecordRepository repository) {
-        this.repository = repository;
-    }
+	@Autowired
+	public PersonController(PersonRepository repository) {
+		this.repository = repository;
+	}
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String home(ModelMap model) {
-        List<Record> records = repository.findAll();
-        model.addAttribute("records", records);
-        model.addAttribute("insertRecord", new Record());
-        return "home";
-    }
+	@RequestMapping(method = RequestMethod.GET)
+	public String viewPeople(ModelMap model) {
+		List<Person> people = repository.findAll();
+		model.addAttribute("people", people);
+		model.addAttribute("insertPerson", new Person());
+		return "people";
+	}
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String insertData(ModelMap model, 
-                             @ModelAttribute("insertRecord") @Valid Record record,
-                             BindingResult result) {
-        if (!result.hasErrors()) {
-            repository.save(record);
-        }
-        return home(model);
-    }
+	@RequestMapping(method = RequestMethod.POST)
+	public String addPerson(ModelMap model, @ModelAttribute("insertRecord") @Valid Person record,
+			BindingResult result) {
+
+		if (!result.hasErrors()) {
+			repository.save(record);
+		}
+		
+		return "redirect:/person";
+	}
 }
