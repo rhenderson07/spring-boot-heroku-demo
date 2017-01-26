@@ -27,5 +27,4 @@ class GlobalDefaultExceptionHandler {
 	mav.setViewName(DEFAULT_ERROR_VIEW);
 	return mav;
     }
-
 }

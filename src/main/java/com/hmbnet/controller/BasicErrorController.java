@@ -1,34 +1,57 @@
 package com.hmbnet.controller;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-@Controller
+@RestController
+@RequestMapping("/error")
 public class BasicErrorController implements ErrorController {
 
-	private static final String ERROR_PATH = "/error";
+    private final ErrorAttributes errorAttributes;
 
-	@Override
-	public String getErrorPath() {
-		return ERROR_PATH;
+    @Autowired
+    public BasicErrorController(ErrorAttributes errorAttributes) {
+	this.errorAttributes = errorAttributes;
+    }
+
+    @Override
+    public String getErrorPath() {
+	return "/error";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public Map<String, Object> error(HttpServletRequest request) {
+	Map<String, Object> body = getErrorAttributes(request, getTraceParameter(request));
+	String trace = (String) body.get("trace");
+	if (trace != null) {
+	    String[] lines = trace.split("\n\t");
+	    body.put("trace", lines);
 	}
+	return body;
+    }
 
-	@RequestMapping(value = ERROR_PATH, method = RequestMethod.GET)
-	public String viewError(
-			@RequestParam(name = "javax.servlet.error.status_code", required = false) Integer statusCode,
-			@RequestParam(name = "javax.servlet.error.exception", required = false) Throwable throwable,
-			Model model) {
-
-		String errorMessage = throwable != null ? throwable.getMessage() : null;
-
-		model.addAttribute("statusCode", statusCode);
-		model.addAttribute("errorMessage", errorMessage);
-
-		return "error";
+    private boolean getTraceParameter(HttpServletRequest request) {
+	String parameter = request.getParameter("trace");
+	if (parameter == null) {
+	    return false;
 	}
+	return !"false".equals(parameter.toLowerCase());
+    }
+
+    private Map<String, Object> getErrorAttributes(HttpServletRequest request, boolean includeStackTrace) {
+	RequestAttributes requestAttributes = new ServletRequestAttributes(request);
+	return errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
+    }
 
 }
