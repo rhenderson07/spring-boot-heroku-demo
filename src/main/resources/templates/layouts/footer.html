@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<div th:fragment="footer">
-		<div class="container">
-			<div class="footer text-center">
-				<ul class="list-inline">
-					<li><a href="https://github.com/rhenderson07">GitHub</a></li>
-				</ul>
-				<ul class="list-inline">
-					<li>Built on <a href="https://www.java.com/en/">Java 1.8</a>, <a href="http://projects.spring.io/spring-boot/">Spring Boot</a>, <a href="http://getbootstrap.com">Twitter Bootstrap</a></li>
-					<li>Developed in <a href="https://spring.io/tools/sts">Eclipse-Spring Tool Suite</a></li>
-					<li>Running on <a href="https://heroku.com">Heroku</a></li>
-				</ul>
-				<p>&copy; 2017</p>
-			</div>
-		</div>
-	</div>
+	<footer th:fragment="footer" class="container">
+		<p><a href="https://github.com/rhenderson07">GitHub</a></p>
+		<ul class="list-inline">
+			<li>Built on 
+			<a href="https://www.java.com/en/">Java 1.8</a>, 
+			<a href="http://projects.spring.io/spring-boot/">Spring Boot</a>, 
+			<a href="http://getbootstrap.com">Twitter Bootstrap</a>
+			</li>
+			<li>Developed in <a href="https://spring.io/tools/sts">Eclipse-Spring Tool Suite</a></li>
+			<li>Running on <a href="https://heroku.com">Heroku</a></li>
+		</ul>
+		<p>&copy; 2017</p>
+	</footer>
 </body>
 </html>

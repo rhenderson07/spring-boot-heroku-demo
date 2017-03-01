@@ -17,8 +17,8 @@
 </head>
 <body>
 	<!--/* Standard layout can be mixed with Layout Dialect */-->
-	<div th:replace="layouts/header :: header"></div>
+	<nav th:replace="layouts/navigation :: navigation"></nav>
 	<div layout:fragment="content"></div>
-	<div th:replace="layouts/footer :: footer"></div>
+	<footer th:replace="layouts/footer :: footer"></footer>
 </body>
 </html>
