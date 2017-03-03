@@ -44,11 +44,17 @@
 						<thead>
 							<tr>
 								<th>Records</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="record : ${records}">
 								<td th:text="${record.data}">Some text</td>
+								<td class="text-right">
+									<form th:action="|/demo/${record.recordId}|" th:method="delete">							
+										<button type="submit" class="btn btn-sm btn-danger">Delete</button>
+									</form>
+								</td>
 							</tr>
 						</tbody>
 					</table>

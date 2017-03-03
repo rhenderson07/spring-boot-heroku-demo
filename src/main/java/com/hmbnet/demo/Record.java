@@ -7,6 +7,9 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class Record {
 
@@ -16,13 +19,5 @@ public class Record {
     
     @NotEmpty
     private String data;
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
 
 }

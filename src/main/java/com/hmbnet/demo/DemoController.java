@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,7 +39,7 @@ public class DemoController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String home(ModelMap model) {
+    public String viewRecords(ModelMap model) {
         List<Record> records = recordRepo.findAll();
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
@@ -46,12 +47,17 @@ public class DemoController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String insertData(ModelMap model, 
-                             @ModelAttribute("insertRecord") @Valid Record record,
+    public String insertData(@ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {
         if (!result.hasErrors()) {
             recordRepo.save(record);
         }
-        return home(model);
+        return "redirect:/demo";
+    }
+    
+    @RequestMapping(value="/{recordId}", method=RequestMethod.DELETE)
+    public String deleteRecord(@PathVariable Long recordId){
+    	recordRepo.delete(recordId);
+        return "redirect:/demo";
     }
 }
