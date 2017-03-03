@@ -1,4 +1,4 @@
-package com.hmbnet.demo;
+package com.hmbnet.record;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

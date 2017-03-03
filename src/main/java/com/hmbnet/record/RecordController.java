@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hmbnet.demo;
+package com.hmbnet.record;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -28,13 +28,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/demo")
-public class DemoController {
+@RequestMapping("/records")
+public class RecordController {
 
     private RecordRepository recordRepo;
 
     @Autowired
-    public DemoController(RecordRepository repository) {
+    public RecordController(RecordRepository repository) {
         this.recordRepo = repository;
     }
 
@@ -43,21 +43,21 @@ public class DemoController {
         List<Record> records = recordRepo.findAll();
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
-        return "demo";
+        return "records";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String insertData(@ModelAttribute("insertRecord") @Valid Record record,
+    public String insertRecord(@ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {
         if (!result.hasErrors()) {
             recordRepo.save(record);
         }
-        return "redirect:/demo";
+        return "redirect:/records";
     }
     
     @RequestMapping(value="/{recordId}", method=RequestMethod.DELETE)
     public String deleteRecord(@PathVariable Long recordId){
     	recordRepo.delete(recordId);
-        return "redirect:/demo";
+        return "redirect:/records";
     }
 }
